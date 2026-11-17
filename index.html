@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMW | Ultimate Luxury Automotive Digital Showroom & Atelier India</title>
+  <meta name="description" content="Official BMW Luxury Digital Showroom India. Experience the art of driving, interactive 360° 3D vehicle studio, bespoke on-road car configurator, and certified atelier services in Mumbai, Delhi, and Bengaluru.">
+
+  <!-- Google Fonts: Bebas Neue (Ref Photo Condensed Bold Headings) + Outfit (Ref Photo Geometric Sans Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bmw-obsidian': '#080808',
+            'bmw-carbon': '#141414',
+            'bmw-graphite': '#1d1d1f',
+            'bmw-blue': '#1C69D4',
+            'bmw-border': '#292929',
+            'bmw-m-blue': '#0066B1',
+            'bmw-m-dark': '#002B49',
+            'bmw-m-red': '#E00000'
+          },
+          fontFamily: {
+            heading: ['"Bebas Neue"', '"Anton"', '"Oswald"', '"Impact"', 'sans-serif'],
+            sans: ['"Outfit"', '"Century Gothic"', '"Avenir Next"', '"Urbanist"', '-apple-system', 'sans-serif'],
+            body: ['"Outfit"', '"Century Gothic"', '"Avenir Next"', '"Urbanist"', '-apple-system', 'sans-serif'],
+            mono: ['"Outfit"', '"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Three.js 3D WebGL Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Bespoke Luxury Stylesheet -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="bg-[#080808] text-white antialiased selection:bg-[#1C69D4] selection:text-white">
+
+  <!-- STICKY LUXURY NAVIGATION BAR -->
+  <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-5 bg-gradient-to-b from-[#080808]/90 via-[#080808]/40 to-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      
+      <!-- BMW Brand Emblem & Atelier Identity -->
+      <a href="#home" class="flex items-center gap-3 group text-decoration-none">
+        <div class="relative w-10 h-10 rounded-full bg-black border-2 border-white/30 flex items-center justify-center p-0.5 shadow-[0_0_15px_rgba(28,105,212,0.3)] group-hover:border-[#1C69D4] transition-all">
+          <svg viewBox="0 0 100 100" class="w-full h-full transform group-hover:rotate-45 transition-transform duration-700">
+            <circle cx="50" cy="50" r="48" fill="#000" stroke="#fff" stroke-width="2" />
+            <circle cx="50" cy="50" r="42" fill="#fff" />
+            <path d="M 50,50 L 50,8 A 42,42 0 0,0 8,50 Z" fill="#1C69D4" />
+            <path d="M 50,50 L 92,50 A 42,42 0 0,0 50,8 Z" fill="#FFFFFF" />
+            <path d="M 50,50 L 50,92 A 42,42 0 0,0 92,50 Z" fill="#1C69D4" />
+            <path d="M 50,50 L 8,50 A 42,42 0 0,0 50,92 Z" fill="#FFFFFF" />
+            <line x1="50" y1="8" x2="50" y2="92" stroke="#000" stroke-width="2.5" />
+            <line x1="8" y1="50" x2="92" y2="50" stroke="#000" stroke-width="2.5" />
+            <circle cx="50" cy="50" r="48" fill="none" stroke="#666" stroke-width="1" />
+          </svg>
+        </div>
+
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-heading font-black text-xl tracking-[0.25em] text-white group-hover:text-[#1C69D4] transition-colors">
+              BMW
+            </span>
+            <span class="h-1.5 w-1.5 rounded-full bg-[#1C69D4] shadow-[0_0_8px_#1C69D4]"></span>
+            <span class="text-[9px] uppercase font-mono tracking-widest text-[#1C69D4] font-bold">
+              INDIA
+            </span>
+          </div>
+          <span class="text-[8px] uppercase tracking-[0.28em] text-[#A3A3A3] font-medium">
+            Luxury Signature Atelier
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links (All 6 Pages) -->
+      <nav class="hidden lg:flex items-center gap-7">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#models" class="nav-link">Explore Models</a>
+        <a href="#360" class="nav-link">360° Experience</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#configurator" class="nav-link">Configurator & Pricing</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+      </nav>
+
+      <!-- Right Action Toolbar -->
+      <div class="flex items-center gap-3">
+        <!-- Test Drive CTA -->
+        <button onclick="window.BMWApp.openQuickEnquiry('Test Drive Consultation')" class="hidden sm:inline-flex btn-bmw-blue py-2 px-5 text-xs">
+          <span>Book Test Drive</span>
+        </button>
+
+        <!-- Mobile Drawer Hamburger -->
+        <button id="btn-mobile-menu" class="lg:hidden p-2 rounded bg-[#141414] border border-[#292929] text-white">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 bg-[#080808]/95 backdrop-blur-2xl flex flex-col p-6 hidden">
+    <div class="flex items-center justify-between pb-6 border-b border-[#292929]">
+      <div class="flex flex-col">
+        <span class="font-heading font-black text-xl tracking-[0.25em] text-white">BMW INDIA</span>
+        <span class="text-[9px] uppercase tracking-[0.25em] text-[#1C69D4]">Signature Atelier</span>
+      </div>
+      <button id="btn-close-drawer" class="p-2 rounded-full bg-[#141414] text-white">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <nav class="flex flex-col gap-5 py-8 text-sm uppercase tracking-wider font-bold">
+      <a href="#home" class="text-neutral-300 hover:text-[#1C69D4] py-2 border-b border-[#1c1c1f]">Home</a>
+      <a href="#models" class="text-neutral-300 hover:text-[#1C69D4] py-2 border-b border-[#1c1c1f]">Explore Models</a>
+      <a href="#360" class="text-neutral-300 hover:text-[#1C69D4] py-2 border-b border-[#1c1c1f]">360° Experience</a>
+      <a href="#services" class="text-neutral-300 hover:text-[#1C69D4] py-2 border-b border-[#1c1c1f]">Services</a>
+      <a href="#configurator" class="text-neutral-300 hover:text-[#1C69D4] py-2 border-b border-[#1c1c1f]">Configurator & Pricing</a>
+      <a href="#gallery" class="text-neutral-300 hover:text-[#1C69D4] py-2 border-b border-[#1c1c1f]">Gallery</a>
+    </nav>
+
+    <div class="mt-auto pt-6 border-t border-[#292929] space-y-3">
+      <button onclick="document.getElementById('mobile-drawer').classList.add('hidden'); window.BMWApp.openQuickEnquiry('Mobile Test Drive')" class="btn-bmw-blue w-full py-3 text-center block">
+        BOOK TEST DRIVE
+      </button>
+      <button onclick="document.getElementById('mobile-drawer').classList.add('hidden'); window.porscheAdmin.openAdminModal()" class="w-full py-2.5 rounded bg-[#141414] text-xs text-neutral-400 uppercase font-mono tracking-wider border border-[#292929]">
+        Executive Directors Portal
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN DYNAMIC PAGE CONTAINER (Rendered by window.BMWPages) -->
+  <main id="page-container" class="min-h-screen pt-20">
+    <!-- Active page loads here -->
+  </main>
+
+  <!-- LUXURY FOOTER -->
+  <footer class="bg-[#080808] border-t border-[#292929] pt-16 pb-12 text-[#A3A3A3] text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-black border border-white/40 flex items-center justify-center p-0.5 shadow-[0_0_15px_rgba(28,105,212,0.4)]">
+              <svg viewBox="0 0 100 100" class="w-full h-full">
+                <circle cx="50" cy="50" r="48" fill="#000" stroke="#fff" stroke-width="2" />
+                <circle cx="50" cy="50" r="42" fill="#fff" />
+                <path d="M 50,50 L 50,8 A 42,42 0 0,0 8,50 Z" fill="#1C69D4" />
+                <path d="M 50,50 L 92,50 A 42,42 0 0,0 50,8 Z" fill="#FFFFFF" />
+                <path d="M 50,50 L 50,92 A 42,42 0 0,0 92,50 Z" fill="#1C69D4" />
+                <path d="M 50,50 L 8,50 A 42,42 0 0,0 50,92 Z" fill="#FFFFFF" />
+                <line x1="50" y1="8" x2="50" y2="92" stroke="#000" stroke-width="2.5" />
+                <line x1="8" y1="50" x2="92" y2="50" stroke="#000" stroke-width="2.5" />
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-heading font-black text-white text-lg tracking-[0.2em]">BMW LUXURY SHOWROOM</span>
+              <span class="text-[10px] uppercase tracking-widest text-[#1C69D4]">Sheer Driving Pleasure • India</span>
+            </div>
+          </div>
+          <p class="text-neutral-400 text-xs leading-relaxed max-w-sm pt-2">
+            Dedicated to discerning luxury automotive connoisseurs across India. Experience the timeless union of German engineering precision, bespoke craftsmanship, and electrifying performance.
+          </p>
+          <div class="pt-2">
+            <a href="https://wa.me/919820011223?text=Hello%20BMW%20Showroom%20Concierge,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20vehicle%20allocation." target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-[#141414] border border-[#292929] hover:border-[#25D366] text-white hover:text-[#25D366] transition-all text-xs font-medium">
+              <i data-lucide="message-square" class="w-4 h-4 text-[#25D366]"></i>
+              <span>Instant WhatsApp VIP Concierge</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 opacity-60"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white text-xs uppercase tracking-[0.2em] font-heading font-bold mb-4 border-b border-[#292929] pb-2">Showroom Pages</h4>
+          <ul class="space-y-2.5 text-xs">
+            <li><a href="#home" class="hover:text-white transition">01. Home & Brand Story</a></li>
+            <li><a href="#services" class="hover:text-white transition">02. Atelier Services & Maintenance</a></li>
+            <li><a href="#360" class="hover:text-white transition">03. BMW 360° Interactive 3D</a></li>
+            <li><a href="#models" class="hover:text-white transition">04. Dynamic Vehicle Catalogue</a></li>
+            <li><a href="#configurator" class="hover:text-white transition">05. Configurator & On-Road Calculator</a></li>
+            <li><a href="#gallery" class="hover:text-white transition">06. Editorial Gallery & Stories</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white text-xs uppercase tracking-[0.2em] font-heading font-bold mb-4 border-b border-[#292929] pb-2">Automotive Portfolios</h4>
+          <ul class="space-y-2.5 text-xs">
+            <li><a href="#models" class="hover:text-white">BMW M High Performance (M4, M8, XM)</a></li>
+            <li><a href="#models" class="hover:text-white">BMW Luxury Class Sedans (7 Series, 3 GL)</a></li>
+            <li><a href="#models" class="hover:text-white">BMW X Sports Activity Vehicles (X7, X5, X1)</a></li>
+            <li><a href="#models" class="hover:text-white">BMW i All-Electric Range (i7, i4, iX)</a></li>
+            <li><a href="#configurator" class="hover:text-white">Bespoke BMW Individual Atelier</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white text-xs uppercase tracking-[0.2em] font-heading font-bold mb-4 border-b border-[#292929] pb-2">Atelier Centers</h4>
+          <div class="space-y-3 text-xs">
+            <div class="space-y-0.5">
+              <div class="text-white font-medium flex items-center gap-1.5">
+                <i data-lucide="map-pin" class="w-3 h-3 text-[#1C69D4]"></i>
+                <span>Mumbai — Worli Atelier</span>
+              </div>
+              <p class="text-[11px] text-neutral-500 pl-4">+91 22 6825 8888</p>
+            </div>
+            <div class="space-y-0.5">
+              <div class="text-white font-medium flex items-center gap-1.5">
+                <i data-lucide="map-pin" class="w-3 h-3 text-[#1C69D4]"></i>
+                <span>New Delhi — Aerocity Prestige</span>
+              </div>
+              <p class="text-[11px] text-neutral-500 pl-4">+91 11 4987 5555</p>
+            </div>
+            <div class="space-y-0.5">
+              <div class="text-white font-medium flex items-center gap-1.5">
+                <i data-lucide="map-pin" class="w-3 h-3 text-[#1C69D4]"></i>
+                <span>Bengaluru — Lavelle Road</span>
+              </div>
+              <p class="text-[11px] text-neutral-500 pl-4">+91 80 4345 7777</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-[#1a1a1a] py-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="phone" class="w-4 h-4 text-[#1C69D4]"></i>
+          <div>
+            <span class="text-neutral-500 block text-[10px]">TOLL-FREE CONCIERGE (24/7)</span>
+            <a href="tel:18001022269" class="text-white hover:text-[#1C69D4] font-mono">1800 102 2269 (BMW India)</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="mail" class="w-4 h-4 text-[#1C69D4]"></i>
+          <div>
+            <span class="text-neutral-500 block text-[10px]">PRIVATE CLIENT DESK</span>
+            <a href="mailto:concierge@bmw-luxury.in" class="text-white hover:text-[#1C69D4]">concierge@bmw-luxury.in</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="clock" class="w-4 h-4 text-[#1C69D4]"></i>
+          <div>
+            <span class="text-neutral-500 block text-[10px]">ATELIER HOURS</span>
+            <span class="text-white">Mon – Sun: 10:00 AM – 8:00 PM IST</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-[#1a1a1a] pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+        <p>© 2026 BMW Luxury Automotive Showroom India. All rights reserved.</p>
+        <p class="max-w-2xl text-center md:text-right leading-tight">
+          *Ex-showroom prices shown are indicative and subject to change without prior notice as per BMW India guidelines. Registration (RTO), TCS, and insurance calculated as per applicable state regulations. GST and Compensation Cess are already inclusive in ex-showroom prices.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts: Application Stack -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/viewer360.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
